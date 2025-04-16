@@ -2,6 +2,9 @@ import s from './Cabinet.module.scss'
 import { NavLink, Outlet } from 'react-router'
 import { BOARDS_LINK, ISSUES_LINK } from '../../constants.ts'
 import cn from 'classnames'
+import TaskModal from '../TaskModal'
+import { toggleIsOpenState } from '../../store/slices/modalSlice.ts'
+import { useAppDispatch } from '../../hooks/reduxHooks.ts'
 
 const LINKS = [
   {
@@ -17,6 +20,12 @@ const LINKS = [
 ]
 
 const Cabinet = () => {
+  const dispatch = useAppDispatch()
+
+  const onOpenModal = () => {
+    dispatch(toggleIsOpenState({ isOpen: true }))
+  }
+
   return (
     <div className={s.cabinet}>
       <header className={s.header}>
@@ -36,9 +45,10 @@ const Cabinet = () => {
             ))}
           </ul>
         </nav>
-        <button> Создать задачу</button>
+        <button onClick={onOpenModal}>Создать задачу</button>
       </header>
       <Outlet />
+      <TaskModal />
     </div>
   )
 }
