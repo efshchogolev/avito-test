@@ -1,0 +1,45 @@
+
+.cabinet {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+  border-bottom: 1px solid black;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+}
+
+.navigationList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+
+}
+
+.navigationLink {
+  text-decoration: none;
+  color: rgba(0, 0, 255, 0.50);
+
+  &_active {
+    color: rgba(0, 0, 255);
+  }
+}
