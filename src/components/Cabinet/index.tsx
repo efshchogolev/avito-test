@@ -7,10 +7,12 @@ const LINKS = [
   {
     link: BOARDS_LINK,
     text: 'Все задачи',
+    id: 1,
   },
   {
     link: ISSUES_LINK,
     text: 'Проекты',
+    id: 2,
   },
 ]
 
@@ -21,7 +23,7 @@ const Cabinet = () => {
         <nav className={s.navigation}>
           <ul className={s.navigationList}>
             {LINKS.map((link) => (
-              <li className={s.listItem}>
+              <li className={s.listItem} key={link.id}>
                 <NavLink
                   to={link.link}
                   className={({ isActive }) =>
