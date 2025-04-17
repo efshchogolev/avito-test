@@ -10,41 +10,12 @@ import {
 } from '../../store/slices/tasksApiSlice.ts'
 import { useLocation, useNavigate, useParams } from 'react-router'
 import { useForm } from 'react-hook-form'
-import { PriorityObj, StatusObj, TaskForm } from '../../@types'
+import { TaskForm } from '../../@types'
 import { DevTool } from '@hookform/devtools'
 import { useGetBoardsQuery } from '../../store/slices/boardsApiSlice.ts'
 import { useGetUsersQuery } from '../../store/slices/userApiSlice.ts'
 import { useEffect } from 'react'
-
-const PRIORITIES: PriorityObj[] = [
-  {
-    name: 'Низкий',
-    value: 'Low',
-  },
-  {
-    name: 'Средний',
-    value: 'Medium',
-  },
-  {
-    name: 'Высокий',
-    value: 'High',
-  },
-]
-
-const STATUSES: StatusObj[] = [
-  {
-    name: 'To do',
-    value: 'Backlog',
-  },
-  {
-    name: 'In Progress',
-    value: 'InProgress',
-  },
-  {
-    name: 'Done',
-    value: 'Done',
-  },
-]
+import { PRIORITIES, STATUSES } from '../../constants.ts'
 
 const TaskModal = () => {
   const isModalOpenSelector = useAppSelector((state) => state.modal.isOpen)
@@ -145,7 +116,6 @@ const TaskModal = () => {
             {...register('boardId')}
             {...(boardId && { defaultValue: boardId })}
             disabled={!!boardId}
-            key={boardId}
           >
             {boardsData?.map((board) => (
               <MenuItem value={board.id}>{board.name}</MenuItem>
@@ -175,7 +145,9 @@ const TaskModal = () => {
               })}
             >
               {STATUSES.map((status) => (
-                <MenuItem value={status.value}>{status.name}</MenuItem>
+                <MenuItem key={status.value} value={status.value}>
+                  {status.name}
+                </MenuItem>
               ))}
             </TextField>
           )}
