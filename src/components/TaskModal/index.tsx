@@ -47,9 +47,11 @@ const TaskModal = () => {
   const [createTask] = useCreateTaskMutation()
   const [updateTask] = useUpdateTaskMutation()
 
-  const { control, handleSubmit, register, reset } = useForm<TaskForm>({
+  const { handleSubmit, register, reset, formState } = useForm<TaskForm>({
     mode: 'onSubmit',
   })
+
+  const { errors } = formState
 
   const onSubmit = async (taskData: TaskForm) => {
     try {
@@ -102,20 +104,42 @@ const TaskModal = () => {
           <h2 className={s.modalTitle}>{title}</h2>
         </header>
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-          <TextField label={'Название'} size={'small'} {...register('title')} />
+          <TextField
+            label={'Название'}
+            size={'small'}
+            {...register('title', {
+              required: 'Обязательное поле',
+              maxLength: {
+                value: 100,
+                message: 'Название должно соддержать не более 100 символов',
+              },
+            })}
+            error={!!errors.title}
+            helperText={errors.title?.message}
+          />
           <TextField
             label="Описание"
             multiline
             rows={4}
-            {...register('description')}
+            {...register('description', {
+              required: 'Обязательное поле',
+              maxLength: {
+                value: 100,
+                message: 'Описание должно соддержать не более 500 символов',
+              },
+            })}
+            error={!!errors.description}
+            helperText={errors.description?.message}
           />
           <TextField
             select
             label="Проект"
             size={'small'}
-            {...register('boardId')}
+            {...register('boardId', { required: 'Обязательное поле' })}
             {...(boardId && { defaultValue: boardId })}
             disabled={!!boardId}
+            error={!!errors.boardId}
+            helperText={errors.boardId?.message}
           >
             {boardsData?.map((board) => (
               <MenuItem value={board.id}>{board.name}</MenuItem>
@@ -155,10 +179,12 @@ const TaskModal = () => {
             select
             label="Исполнитель"
             size={'small'}
-            {...register('assigneeId')}
+            {...register('assigneeId', { required: 'Обязательное поле' })}
             {...(taskSelector?.assignee.id && {
               defaultValue: taskSelector?.assignee.id,
             })}
+            error={!!errors.assigneeId}
+            helperText={errors.assigneeId?.message}
           >
             {usersData?.map((user) => (
               <MenuItem value={user.id}>{user.fullName}</MenuItem>
