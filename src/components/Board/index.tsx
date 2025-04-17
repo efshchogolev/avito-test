@@ -54,7 +54,7 @@ const Project = () => {
                     className={s.task}
                     key={task.id}
                     onClick={() => {
-                      dispatch(openModal({ taskId: task.id }))
+                      dispatch(openModal({ taskId: task.id, task: task }))
                     }}
                   >
                     <h4 className={s.taskTitle}>{task.title}</h4>

@@ -5,6 +5,7 @@ const initialState: ModalState = {
   isOpen: false,
   taskId: undefined,
   boardId: undefined,
+  task: undefined,
 }
 
 const modalSlice = createSlice({
@@ -15,12 +16,13 @@ const modalSlice = createSlice({
       state.isOpen = true
       state.taskId = action.payload.taskId
       state.boardId = action.payload.boardId
+      state.task = action.payload.task
     },
-
     closeModal(state) {
       state.isOpen = false
       state.taskId = null
       state.boardId = null
+      state.task = null
     },
   },
 })

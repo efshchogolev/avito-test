@@ -9,12 +9,12 @@ import { Button } from '@mui/material'
 
 const LINKS = [
   {
-    link: BOARDS_LINK,
+    link: ISSUES_LINK,
     text: 'Все задачи',
     id: 1,
   },
   {
-    link: ISSUES_LINK,
+    link: BOARDS_LINK,
     text: 'Проекты',
     id: 2,
   },

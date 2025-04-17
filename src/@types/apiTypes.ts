@@ -1,3 +1,5 @@
+import { TaskForm } from './index.ts'
+
 export type ApiResponse<T> = {
   data: T
 }
@@ -31,4 +33,19 @@ export type Task = {
   title: string
   boardId: number
   boardName: string
+}
+
+export type TaskForCreate = Omit<TaskForm, 'status'>
+
+export type TaskForUpdate = Omit<TaskForm, 'boardId'>
+
+export type User = {
+  avatarUrl: string
+  description: string
+  email: string
+  fullName: string
+  id: number
+  tasksCount: number
+  teamId: number
+  teamName: string
 }

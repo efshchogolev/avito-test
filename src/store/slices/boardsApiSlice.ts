@@ -13,6 +13,16 @@ export const boardsApiSlice = apiSlice.injectEndpoints({
       query: ({ boardId }) => ({
         url: `/boards/${boardId}`,
       }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({
+                type: 'Tasks' as const,
+                id,
+              })),
+              { type: 'Tasks', id: 'LIST' },
+            ]
+          : [{ type: 'Tasks', id: 'LIST' }],
       transformResponse: (response: { data: BoardTask[] }) => response.data,
     }),
   }),
