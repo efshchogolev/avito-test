@@ -1,6 +1,9 @@
 import s from './Issues.module.scss'
+import { useGetTasksQuery } from '../../store/slices/tasksApiSlice.ts'
 
 const Issues = () => {
+  const { data: tasksData } = useGetTasksQuery()
+
   return (
     <section className={s.issues}>
       <div className={s.filters}>
@@ -9,12 +12,11 @@ const Issues = () => {
       </div>
       <div className={s.tasksContainer}>
         <ul className={s.taskList}>
-          <li className={s.taskCard}>
-            <h2 className={s.taskName}>Задача 1</h2>
-          </li>
-          <li className={s.taskCard}>
-            <h2 className={s.taskName}>Задача 1</h2>
-          </li>
+          {tasksData?.map((task) => (
+            <li className={s.taskCard} key={task.id}>
+              <h2 className={s.taskName}>{task.title}</h2>
+            </li>
+          ))}
         </ul>
         <button className={s.button}>Создать задачу</button>
       </div>

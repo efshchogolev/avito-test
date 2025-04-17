@@ -20,11 +20,15 @@ export type AssigneeUser = {
   id: number
 }
 
-export type BoardTask = {
+export type BoardTask = Omit<Task, 'boardName' | 'boardId'>
+
+export type Task = {
   assignee: AssigneeUser
   description: string
   id: number
   priority: TaskPriority
   status: TaskStatus
   title: string
+  boardId: number
+  boardName: string
 }
