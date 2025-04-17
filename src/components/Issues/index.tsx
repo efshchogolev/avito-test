@@ -1,8 +1,11 @@
 import s from './Issues.module.scss'
 import { useGetTasksQuery } from '../../store/slices/tasksApiSlice.ts'
+import { useAppDispatch } from '../../hooks/reduxHooks.ts'
+import { openModal } from '../../store/slices/modalSlice.ts'
 
 const Issues = () => {
   const { data: tasksData } = useGetTasksQuery()
+  const dispatch = useAppDispatch()
 
   return (
     <section className={s.issues}>
@@ -13,7 +16,13 @@ const Issues = () => {
       <div className={s.tasksContainer}>
         <ul className={s.taskList}>
           {tasksData?.map((task) => (
-            <li className={s.taskCard} key={task.id}>
+            <li
+              className={s.taskCard}
+              key={task.id}
+              onClick={() => {
+                dispatch(openModal({ taskId: task.id }))
+              }}
+            >
               <h2 className={s.taskName}>{task.title}</h2>
             </li>
           ))}

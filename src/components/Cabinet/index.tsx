@@ -3,8 +3,9 @@ import { NavLink, Outlet } from 'react-router'
 import { BOARDS_LINK, ISSUES_LINK } from '../../constants.ts'
 import cn from 'classnames'
 import TaskModal from '../TaskModal'
-import { toggleIsOpenState } from '../../store/slices/modalSlice.ts'
+import { openModal } from '../../store/slices/modalSlice.ts'
 import { useAppDispatch } from '../../hooks/reduxHooks.ts'
+import { Button } from '@mui/material'
 
 const LINKS = [
   {
@@ -23,7 +24,11 @@ const Cabinet = () => {
   const dispatch = useAppDispatch()
 
   const onOpenModal = () => {
-    dispatch(toggleIsOpenState({ isOpen: true }))
+    dispatch(
+      openModal({
+        taskId: null,
+      }),
+    )
   }
 
   return (
@@ -33,19 +38,27 @@ const Cabinet = () => {
           <ul className={s.navigationList}>
             {LINKS.map((link) => (
               <li className={s.listItem} key={link.id}>
-                <NavLink
-                  to={link.link}
-                  className={({ isActive }) =>
-                    cn(s.navigationLink, isActive && s.navigationLink_active)
-                  }
-                >
-                  {link.text}
+                <NavLink to={link.link}>
+                  {({ isActive }) => (
+                    <Button
+                      variant="text"
+                      size={'small'}
+                      className={cn(
+                        s.linkButton,
+                        isActive && s.linkButton_active,
+                      )}
+                    >
+                      {link.text}
+                    </Button>
+                  )}
                 </NavLink>
               </li>
             ))}
           </ul>
         </nav>
-        <button onClick={onOpenModal}>Создать задачу</button>
+        <Button variant="contained" size={'small'} onClick={onOpenModal}>
+          Создать задачу
+        </Button>
       </header>
       <Outlet />
       <TaskModal />

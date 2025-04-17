@@ -1,6 +1,7 @@
 import s from './Boards.module.scss'
 import { Link } from 'react-router'
 import { useGetBoardsQuery } from '../../store/slices/boardsApiSlice.ts'
+import { Button } from '@mui/material'
 
 const Boards = () => {
   const { data: boardsData } = useGetBoardsQuery()
@@ -13,7 +14,9 @@ const Boards = () => {
           <li className={s.boardCard} key={board.id}>
             <h2 className={s.boardName}>{board.name}</h2>
             <Link className={s.link} to={`/board/${board.id}`}>
-              Перейти к доске
+              <Button variant="text" size={'small'}>
+                Перейти к доске
+              </Button>
             </Link>
           </li>
         ))}

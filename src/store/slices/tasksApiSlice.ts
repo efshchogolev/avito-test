@@ -9,7 +9,13 @@ export const boardsApiSlice = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: { data: Task[] }) => response.data,
     }),
+    getTask: build.query<Task, { taskId: number }>({
+      query: ({ taskId }) => ({
+        url: `/tasks/${taskId}`,
+      }),
+      transformResponse: (response: { data: Task }) => response.data,
+    }),
   }),
 })
 
-export const { useGetTasksQuery } = boardsApiSlice
+export const { useGetTasksQuery, useGetTaskQuery } = boardsApiSlice

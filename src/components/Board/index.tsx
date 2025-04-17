@@ -5,6 +5,8 @@ import {
   useGetBoardTasksQuery,
 } from '../../store/slices/boardsApiSlice.ts'
 import { TaskStatus } from '../../@types'
+import { openModal } from '../../store/slices/modalSlice.ts'
+import { useAppDispatch } from '../../hooks/reduxHooks.ts'
 
 const STATUSES: { status: TaskStatus; title: string }[] = [
   { status: 'Backlog', title: 'To do' },
@@ -21,6 +23,8 @@ const STATUSES: { status: TaskStatus; title: string }[] = [
 const Project = () => {
   const { id } = useParams<{ id: string }>()
   const boardId = Number(id)
+
+  const dispatch = useAppDispatch()
 
   const { data: tasksData } = useGetBoardTasksQuery(
     { boardId },
@@ -46,7 +50,13 @@ const Project = () => {
               <h3 className={s.columnTitle}>{statusObj.title}</h3>
               <ul className={s.taskList}>
                 {tasksColumn?.map((task) => (
-                  <li className={s.task} key={task.id}>
+                  <li
+                    className={s.task}
+                    key={task.id}
+                    onClick={() => {
+                      dispatch(openModal({ taskId: task.id }))
+                    }}
+                  >
                     <h4 className={s.taskTitle}>{task.title}</h4>
                   </li>
                 ))}

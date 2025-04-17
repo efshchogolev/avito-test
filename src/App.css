@@ -1,19 +1,19 @@
 #root {
-  max-width: 1280px;
-  text-align: center;
+    width: 100%;
+    max-width: 100vw;
+    text-align: center;
 }
 
-.app{
-  width: 100vw;
-  min-height: 100vh;
-  display: flex;
-  box-sizing: border-box;
+.app {
+    min-height: 100vh;
+    display: flex;
+    box-sizing: border-box;
 }
 
 .card {
-  padding: 2em;
+    padding: 2em;
 }
 
 .read-the-docs {
-  color: #888;
+    color: #888;
 }

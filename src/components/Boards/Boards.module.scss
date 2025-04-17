@@ -28,14 +28,3 @@
   margin: 0;
 }
 
-.link {
-  text-decoration: none;
-  color: blue;
-  transition: .3s ease-in-out transform;
-  margin: 0;
-  padding: 0;
-
-  &:hover {
-    transform: scale(1.03);
-  }
-}

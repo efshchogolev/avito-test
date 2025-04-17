@@ -3,15 +3,27 @@ import s from './TaskModal.module.scss'
 import { Button, IconButton, MenuItem, TextField } from '@mui/material'
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks.ts'
-import { toggleIsOpenState } from '../../store/slices/modalSlice.ts'
+import { closeModal } from '../../store/slices/modalSlice.ts'
+import { useGetTaskQuery } from '../../store/slices/tasksApiSlice.ts'
 
 const TaskModal = () => {
   const isModalOpenSelector = useAppSelector((state) => state.modal.isOpen)
+  const taskIdSelector = useAppSelector((state) => state.modal.taskId)
+
+  const title = taskIdSelector ? 'Редактирование задачи' : 'Создание задачи'
+  const buttonText = taskIdSelector ? 'Обновить' : 'Создать'
+
   const dispatch = useAppDispatch()
 
   const onClose = () => {
-    dispatch(toggleIsOpenState({ isOpen: false }))
+    dispatch(closeModal())
   }
+
+  const { data: taskData } = useGetTaskQuery(
+    { taskId: taskIdSelector! },
+    { skip: !taskIdSelector },
+  )
+
   return (
     <Modal open={isModalOpenSelector} onClose={onClose} className={s.modal}>
       <div className={s.modalContent}>
@@ -24,7 +36,7 @@ const TaskModal = () => {
           <CloseRoundedIcon />
         </IconButton>
         <header>
-          <h2 className={s.modalTitle}>Создание/Редактирование задачи</h2>
+          <h2 className={s.modalTitle}>{title}</h2>
         </header>
         <form className={s.form}>
           <TextField label={'Название'} size={'small'} />
@@ -43,11 +55,13 @@ const TaskModal = () => {
           </TextField>
           <div className={s.buttonsContainer}>
             <Button variant="contained" size={'small'}>
-              Создать/обновить
+              {buttonText}
             </Button>
-            <Button variant="contained" size={'small'}>
-              Перейти на доску
-            </Button>
+            {taskIdSelector && (
+              <Button variant="contained" size={'small'}>
+                Перейти на доску
+              </Button>
+            )}
           </div>
         </form>
       </div>

@@ -7,6 +7,7 @@
 
 export type ModalState = {
   isOpen: boolean
+  taskId?: number | null
 }
 
 export * from './apiTypes.ts'

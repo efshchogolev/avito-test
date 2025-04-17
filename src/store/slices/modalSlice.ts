@@ -3,18 +3,25 @@ import { ModalState } from '../../@types'
 
 const initialState: ModalState = {
   isOpen: false,
+  taskId: undefined,
 }
 
 const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    toggleIsOpenState(state, action: PayloadAction<{ isOpen: boolean }>) {
-      state.isOpen = action.payload.isOpen
+    openModal(state, action: PayloadAction<Pick<ModalState, 'taskId'>>) {
+      state.isOpen = true
+      state.taskId = action.payload.taskId
+    },
+
+    closeModal(state) {
+      state.isOpen = false
+      state.taskId = null
     },
   },
 })
 
-export const { toggleIsOpenState } = modalSlice.actions
+export const { openModal, closeModal } = modalSlice.actions
 
 export default modalSlice.reducer
