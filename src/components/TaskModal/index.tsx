@@ -42,8 +42,8 @@ const TaskModal = () => {
 
   const boardId = Number(id) || boardIdSelector
 
-  const { data: boardsData } = useGetBoardsQuery()
-  const { data: usersData } = useGetUsersQuery()
+  const { data: boardsData = [] } = useGetBoardsQuery()
+  const { data: usersData = [] } = useGetUsersQuery()
 
   const [createTask] = useCreateTaskMutation()
   const [updateTask] = useUpdateTaskMutation()
@@ -83,6 +83,7 @@ const TaskModal = () => {
         priority: null,
         status: null,
         assigneeId: null,
+        boardId: boardId,
       })
     }
   }, [isModalOpenSelector, boardId, taskSelector])

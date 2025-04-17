@@ -27,6 +27,8 @@ const Cabinet = () => {
     dispatch(
       openModal({
         taskId: null,
+        boardId: null,
+        task: null,
       }),
     )
   }

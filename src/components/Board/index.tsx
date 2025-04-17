@@ -26,7 +26,7 @@ const Project = () => {
 
   const dispatch = useAppDispatch()
 
-  const { data: tasksData } = useGetBoardTasksQuery(
+  const { data: tasksData = [] } = useGetBoardTasksQuery(
     { boardId },
     { skip: !boardId },
   )
@@ -54,7 +54,13 @@ const Project = () => {
                     className={s.task}
                     key={task.id}
                     onClick={() => {
-                      dispatch(openModal({ taskId: task.id, task: task }))
+                      dispatch(
+                        openModal({
+                          taskId: task.id,
+                          task: task,
+                          boardId: board?.id,
+                        }),
+                      )
                     }}
                   >
                     <h4 className={s.taskTitle}>{task.title}</h4>

@@ -10,6 +10,16 @@
   justify-content: space-between;
 }
 
+.select.select {
+  min-width: 150px;
+}
+
+.filtersContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .tasksContainer {
   display: flex;
   flex-direction: column;
