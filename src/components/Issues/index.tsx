@@ -20,7 +20,8 @@ const Issues = () => {
               className={s.taskCard}
               key={task.id}
               onClick={() => {
-                dispatch(openModal({ taskId: task.id }))
+                console.log(task.boardId)
+                dispatch(openModal({ taskId: task.id, boardId: task.boardId }))
               }}
             >
               <h2 className={s.taskName}>{task.title}</h2>
