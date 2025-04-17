@@ -1,4 +1,4 @@
-import { apiSlice } from './apiSlice'
+import { apiSlice } from './apiSlice.ts'
 import { User } from '../../@types'
 
 export const userApiSlice = apiSlice.injectEndpoints({

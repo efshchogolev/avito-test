@@ -1,4 +1,4 @@
-import { apiSlice } from './apiSlice'
+import { apiSlice } from './apiSlice.ts'
 import { Task, TaskForCreate, TaskForUpdate } from '../../@types'
 
 export const boardsApiSlice = apiSlice.injectEndpoints({

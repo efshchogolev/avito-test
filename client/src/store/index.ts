@@ -4,7 +4,7 @@ import {
   configureStore,
   Reducer,
 } from '@reduxjs/toolkit'
-import { apiSlice } from './slices/apiSlice'
+import { apiSlice } from './slices/apiSlice.ts'
 import modalReducer from './slices/modalSlice.ts'
 import {
   FLUSH,

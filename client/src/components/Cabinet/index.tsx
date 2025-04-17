@@ -62,7 +62,9 @@ const Cabinet = () => {
           Создать задачу
         </Button>
       </header>
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
       <TaskModal />
     </div>
   )
