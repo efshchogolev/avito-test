@@ -11,7 +11,6 @@ import {
 import { useLocation, useNavigate, useParams } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { TaskForm } from '../../@types'
-import { DevTool } from '@hookform/devtools'
 import { useGetBoardsQuery } from '../../store/slices/boardsApiSlice.ts'
 import { useGetUsersQuery } from '../../store/slices/userApiSlice.ts'
 import { useEffect } from 'react'
@@ -183,7 +182,6 @@ const TaskModal = () => {
             )}
           </div>
         </form>
-        <DevTool control={control} />
       </div>
     </Modal>
   )

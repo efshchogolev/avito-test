@@ -81,7 +81,6 @@ const Issues = () => {
             <InputLabel id="board-filter">Доска</InputLabel>
             <Select
               id="board-filter"
-              select
               label="Доска"
               size="small"
               value={boardFilter}
