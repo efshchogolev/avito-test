@@ -4,19 +4,12 @@ import Boards from './components/Boards'
 import Cabinet from './components/Cabinet'
 import Board from './components/Board'
 import Issues from './components/Issues'
-import { useState } from 'react'
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-
   return (
     <div className="app">
       <Routes>
-        <Route
-          element={
-            <Cabinet setIsModalOpen={setIsModalOpen} isOpen={isModalOpen} />
-          }
-        >
+        <Route element={<Cabinet />}>
           <Route path="/" element={<Navigate to="/boards" replace />} />
           <Route path="/boards" element={<Boards />} />
           <Route path="/board/:id" element={<Board />} />

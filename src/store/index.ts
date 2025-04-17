@@ -4,9 +4,8 @@ import {
   configureStore,
   Reducer,
 } from '@reduxjs/toolkit'
-
+import { apiSlice } from './slices/apiSlice'
 import modalReducer from './slices/modalSlice.ts'
-
 import {
   FLUSH,
   PAUSE,
@@ -21,6 +20,7 @@ import storage from 'redux-persist/lib/storage'
 
 const combinedReducer = combineReducers({
   modal: modalReducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
 })
 
 export type RootState = ReturnType<typeof combinedReducer>
@@ -45,8 +45,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
-  // }).concat(apiSlice.middleware),
+    }).concat(apiSlice.middleware),
 })
 
 export const persistor = persistStore(store)
