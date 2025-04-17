@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../hooks/reduxHooks.ts'
 import { openModal } from '../../store/slices/modalSlice.ts'
 import {
   Button,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -16,7 +17,7 @@ import { useDebounce } from '../../hooks/useDebounce.ts'
 import { useGetBoardsQuery } from '../../store/slices/boardsApiSlice.ts'
 
 const Issues = () => {
-  const { data: tasksData = [] } = useGetTasksQuery()
+  const { data: tasksData = [], isLoading: isTasksloading } = useGetTasksQuery()
   const { data: boardsData = [] } = useGetBoardsQuery()
   const dispatch = useAppDispatch()
 
@@ -97,7 +98,9 @@ const Issues = () => {
         </div>
       </div>
       <div className={s.tasksContainer}>
-        {filteredTasks?.length === 0 ? (
+        {isTasksloading ? (
+          <CircularProgress className={s.spinner} />
+        ) : filteredTasks?.length === 0 ? (
           <p>Задачи не найдены</p>
         ) : (
           <ul className={s.taskList}>
